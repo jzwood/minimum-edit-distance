@@ -3,7 +3,7 @@
 The **minimum edit distance** is the number of insertions, deletions, and substitutions required to transform one string into another.
 
 ## info
-The minimum edit distance between two strings isn't terribly helpful most of the time. What is interesting and useful is the minimum edit backtrace. This backtrace contains all the information necessary to transform one string from another (see _Usage_ section).
+The minimum edit distance between two strings isn't terribly helpful most of the time. What is interesting and useful is the minimum edit backtrace. This backtrace contains all the information necessary to transform one string to another (see **usage** section).
 
 ### install
 
