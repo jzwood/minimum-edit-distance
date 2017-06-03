@@ -1,7 +1,3 @@
-/*
- * @acknowledgement
- * Adapted from https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance
- */
 module.exports = {
 	diff,
 	reconstruct
@@ -14,21 +10,19 @@ function diff(str1, str2, subCost = 1, insertCost = 1, delCost = 1) {
 	const matrix = []
 	const backtrace = []
 
-	// init first column of each row & backtrace matrix
 	let i = str2Length + 1
 	while (i--) {
 		matrix[i] = [i]
 		backtrace[i] = [2]
 	}
 
-	// init each column in the first row
 	let j = str1Length + 1
 	while (j--) {
 		matrix[0][j] = j
 		backtrace[0][j] = 3
 	}
 
-	// Fill in the rest of the matrix
+	// Fill in matrix
 	for (let i = 1; i <= str2Length; i++) {
 		for (let j = 1; j <= str1Length; j++) {
 			let pointer = 0
@@ -56,7 +50,7 @@ function diff(str1, str2, subCost = 1, insertCost = 1, delCost = 1) {
 		}
 	}
 
-  //perform backtrace
+  // perform backtrace
 	let di = str2Length,
 		dj = str1Length,
     incrementer = 0,
