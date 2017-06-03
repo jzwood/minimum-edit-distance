@@ -3,7 +3,7 @@
 The **minimum edit distance** is the number of insertions, deletions, and substitutions required to transform one string into another.
 
 ## info
-The minimum edit distance between two strings isn't terribly helpful most of the time. What is interesting and useful is the minimum edit backtrace. This backtrace contains all the information necessary to transform one string from another (see _backtrace section_).
+The minimum edit distance between two strings isn't terribly helpful most of the time. What is interesting and useful is the minimum edit backtrace. This backtrace contains all the information necessary to transform one string from another (see _Usage_ section).
 
 ### install
 
@@ -28,13 +28,18 @@ The minimum edit distance between two strings isn't terribly helpful most of the
     console.log(difference.backtrace);
     // [ 'sc',  'sh', 'sf', 'sg', 'sa', 'sg', '1_', 'sn', 'd', 'd', '1_', 'sl', 'sf', 'sy', 'd', '1_', 'd', 'd', 'd', 'd', 'd', '1_' ]
 
+    // prefix 's' = substitute suffix char
+    // 'i' = insert suffix char
+    // 'd' = delete
+    // [0-9]+_ = skip prefix num of chars
+
     let stringOne = minimumEditDistance.reconstruct(str2, difference.backtrace)
 
     console.log(str1 === stringOne); // true
 ```
 
-## Interface
-```javacsript
+## JSDoc
+```java
       /**
        * @typedef {Object} differenceObject
        * @property {number} the minimum edit distance
