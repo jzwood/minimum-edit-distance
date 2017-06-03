@@ -6,19 +6,23 @@ Calculated minimum edit distance so that one may perform char specific diffs to 
 
 First, install the package using npm:
 
-    npm install minimum-edit-distance
-
+```
+	$ npm install minimum-edit-distance
+```
 Then, require the package and use it like so:
 
+```javascript
     const med = require('minimum-edit-distance');
 
-   	let str1 = 'here we have one string';
-	let str2 = 'here we have another string';
+    let str1 = 'here we have one string';
+    let str2 = 'here we have another string';
 
 
     let diff = med.diff(str1, str2);
 
-    console.log(diff.distance); \\ 5
+    console.log(diff.distance); // 5
+```
+
 
 ## License
 
