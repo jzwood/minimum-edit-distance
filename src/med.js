@@ -84,19 +84,44 @@ function diff(str1, str2, subCost = 1, insertCost = 1, delCost = 1) {
 }
 
 function reconstruct(str2, trace){
-	let c = '', pointer = str2.length
-	for(let i=0, n=trace.length; i < n; i++){
-		const op = trace[i], skipBlock = parseInt(op)
-		if(op[1] === '_'){
-			c = str2.slice(pointer - skipBlock, pointer) + c
-			pointer -= skipBlock
-		}else if(op[0] === 's'){
-			c = op[1] + c
-			pointer--
-		}else if(op[0] === 'i'){
-			c = op[1] + c
-		}else{
-			pointer--
+	let c, pointer = str2.length, isStr = typeof str2 === 'string'
+	if(isStr){
+		c = ''
+		for(let i=0, n=trace.length; i < n; i++){
+			const op = trace[i], skipBlock = parseInt(op), op0 = op[0], op1 = op[1]
+			if(op1 === '_'){
+				c = str2.slice(pointer - skipBlock, pointer) + c
+				pointer -= skipBlock
+			}else if(op0 === 's'){
+				c = op1 + c
+				pointer--
+			}else if(op0 === 'i'){
+				c = op1 + c
+			}else{
+				pointer--
+			}
+		}
+	}else{
+		const prependArray = (preArray, postArray) => {
+			for (let i = 0, len = postArray.length; i < len; i++) {
+				preArray.push(postArray[i])
+			}
+			return preArray
+		}
+		c = []
+		for(let i=0, n=trace.length; i < n; i++){
+			const op = trace[i], skipBlock = parseInt(op), op0 = op[0], op1 = op.slice(1)
+			if(op1 === '_'){
+				c = prependArray(str2.slice(pointer - skipBlock, pointer), c)
+				pointer -= skipBlock
+			}else if(op0 === 's'){
+				c = prependArray([op1], c)
+				pointer--
+			}else if(op0 === 'i'){
+				c = prependArray([op1], c)
+			}else{
+				pointer--
+			}
 		}
 	}
 	return c

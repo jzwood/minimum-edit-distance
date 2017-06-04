@@ -3,7 +3,7 @@
 The **minimum edit distance** is the number of insertions, deletions, and substitutions required to transform one string into another.
 
 ## info
-The minimum edit distance between two strings isn't terribly helpful most of the time. What is interesting and useful is the minimum edit backtrace. This backtrace contains all the information necessary to transform one string to another (see **usage** section).
+The minimum edit distance between two strings isn't terribly helpful most of the time. What is interesting and useful is the _minimum edit backtrace_. This backtrace contains all the information necessary to transform one string to another (see **usage** section).
 
 ### install
 
@@ -36,6 +36,21 @@ The minimum edit distance between two strings isn't terribly helpful most of the
     let stringOne = minimumEditDistance.reconstruct(str2, difference.backtrace)
 
     console.log(str1 === stringOne); // true
+```
+
+## Usage for Arrays
+
+```javascript
+    let array1 = ['cat', 'fees', 'hound']
+    let array2 = ['cat', 'kite', 'undo', 'hound']
+
+    let arrDiff = minimumEditDistance.diff(array1, array2)
+
+    console.log(arrDiff.distance) //2
+
+    console.log(arrDiff.backtrace) // [ '1_', 'sfees', 'd', '1_' ]
+
+    console.log(minimumEditDistance.reconstruct(array2, arrDiff.backtrace)) // [ 'cat', 'fees', 'hound' ]
 ```
 
 ## JSDoc
