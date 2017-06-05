@@ -1,3 +1,7 @@
+/**
+ * Minimum Edit Distance
+ * @exports minimum-edit-distance
+ */
 module.exports = {
 	diff,
 	reconstruct
@@ -9,9 +13,12 @@ module.exports = {
  */
 
 /**
- * Returns object with 'distance' and 'backtrace'
- * @param {(string|string[])} p1 - first string or array
- * @param {(string|string[])} p2 - second string or array
+ * Returns diffObj with 'distance' and 'backtrace'
+ * @param {(string|string[])} str1 - first string or array of strings
+ * @param {(string|string[])} str2 - second string or array of strings
+ * @param {number} [subCost=1] - weighted cost of subsitution
+ * @param {number} [insertCost=1] - weighted cost of insertion
+ * @param {number} [delCost=1] - weighted cost of insertion
  * @returns {diffObj}
  */
 function diff(str1, str2, subCost = 1, insertCost = 1, delCost = 1) {
@@ -33,7 +40,7 @@ function diff(str1, str2, subCost = 1, insertCost = 1, delCost = 1) {
 		backtrace[0][j] = 3
 	}
 
-	// Fill in matrix
+	// fills in distance matrix
 	for (let i = 1; i <= str2Length; i++) {
 		for (let j = 1; j <= str1Length; j++) {
 			let pointer = 0
@@ -61,7 +68,7 @@ function diff(str1, str2, subCost = 1, insertCost = 1, delCost = 1) {
 		}
 	}
 
-  // perform backtrace
+  // performs backtrace
 	let di = str2Length,
 		dj = str1Length,
     incrementer = 0,
@@ -95,9 +102,9 @@ function diff(str1, str2, subCost = 1, insertCost = 1, delCost = 1) {
 }
 
 /**
- * Returns p1 from diff(p1, p2)
- * @param {(string|string[])} p2 - p2 from diff(p1, p2)
- * @param {string[]} trace - backtrace output from differenceObject
+ * Returns the (string or array) str1 from diff
+ * @param {(string|string[])} str2 - str2 from diff
+ * @param {string[]} trace - backtrace output from diffObj
  * @returns {(string|string[])}
  */
 function reconstruct(str2, trace){

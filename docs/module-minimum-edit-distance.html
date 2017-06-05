@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Global</title>
+    <title>JSDoc: Module: minimum-edit-distance</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Global</h1>
+    <h1 class="page-title">Module: minimum-edit-distance</h1>
 
     
 
@@ -28,7 +28,8 @@
 
 <header>
     
-        <h2></h2>
+        
+            
         
     
 </header>
@@ -37,8 +38,24 @@
     <div class="container-overview">
     
         
+            <div class="description">Minimum Edit Distance</div>
+        
 
         
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <dl class="details">
@@ -68,6 +85,11 @@
     
 
     
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="med.js.html">med.js</a>, <a href="med.js.html#line5">line 5</a>
+    </li></ul></dd>
+    
 
     
 
@@ -75,6 +97,20 @@
 
     
 </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         
@@ -101,14 +137,14 @@
 
     
 
-    <h4 class="name" id="diff"><span class="type-signature"></span>diff<span class="signature">(p1, p2)</span><span class="type-signature"> &rarr; {<a href="global.html#diffObj">diffObj</a>}</span></h4>
+    <h4 class="name" id="~diff"><span class="type-signature">(inner) </span>diff<span class="signature">(str1, str2, subCost<span class="signature-attributes">opt</span>, insertCost<span class="signature-attributes">opt</span>, delCost<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {diffObj}</span></h4>
 
     
 
 
 
 <div class="description">
-    Returns object with 'distance' and 'backtrace'
+    Returns diffObj with 'distance' and 'backtrace'
 </div>
 
 
@@ -132,7 +168,11 @@
         <th>Type</th>
 
         
+        <th>Attributes</th>
+        
 
+        
+        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -144,7 +184,7 @@
 
         <tr>
             
-                <td class="name"><code>p1</code></td>
+                <td class="name"><code>str1</code></td>
             
 
             <td class="type">
@@ -160,17 +200,29 @@
             </td>
 
             
+                <td class="attributes">
+                
 
+                
+
+                
+                </td>
             
 
-            <td class="description last">first string or array</td>
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">first string or array of strings</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>p2</code></td>
+                <td class="name"><code>str2</code></td>
             
 
             <td class="type">
@@ -186,10 +238,139 @@
             </td>
 
             
+                <td class="attributes">
+                
 
+                
+
+                
+                </td>
             
 
-            <td class="description last">second string or array</td>
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">second string or array of strings</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>subCost</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    1
+                
+                </td>
+            
+
+            <td class="description last">weighted cost of subsitution</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>insertCost</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    1
+                
+                </td>
+            
+
+            <td class="description last">weighted cost of insertion</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>delCost</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    1
+                
+                </td>
+            
+
+            <td class="description last">weighted cost of insertion</td>
         </tr>
 
     
@@ -230,7 +411,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="med.js.html">med.js</a>, <a href="med.js.html#line17">line 17</a>
+        <a href="med.js.html">med.js</a>, <a href="med.js.html#line24">line 24</a>
     </li></ul></dd>
     
 
@@ -264,7 +445,7 @@
     </dt>
     <dd>
         
-<span class="param-type"><a href="global.html#diffObj">diffObj</a></span>
+<span class="param-type">diffObj</span>
 
 
     </dd>
@@ -279,14 +460,14 @@
 
     
 
-    <h4 class="name" id="reconstruct"><span class="type-signature"></span>reconstruct<span class="signature">(p2, trace)</span><span class="type-signature"> &rarr; {string|Array.&lt;string>}</span></h4>
+    <h4 class="name" id="~reconstruct"><span class="type-signature">(inner) </span>reconstruct<span class="signature">(str2, trace)</span><span class="type-signature"> &rarr; {string|Array.&lt;string>}</span></h4>
 
     
 
 
 
 <div class="description">
-    Returns p1 from diff(p1, p2)
+    Returns the (string or array) str1 from diff
 </div>
 
 
@@ -322,7 +503,7 @@
 
         <tr>
             
-                <td class="name"><code>p2</code></td>
+                <td class="name"><code>str2</code></td>
             
 
             <td class="type">
@@ -341,7 +522,7 @@
 
             
 
-            <td class="description last">p2 from diff(p1, p2)</td>
+            <td class="description last">str2 from diff</td>
         </tr>
 
     
@@ -364,7 +545,7 @@
 
             
 
-            <td class="description last">backtrace output from differenceObject</td>
+            <td class="description last">backtrace output from diffObj</td>
         </tr>
 
     
@@ -405,7 +586,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="med.js.html">med.js</a>, <a href="med.js.html#line103">line 103</a>
+        <a href="med.js.html">med.js</a>, <a href="med.js.html#line110">line 110</a>
     </li></ul></dd>
     
 
@@ -460,7 +641,7 @@
 
         
                 
-<h4 class="name" id="diffObj">diffObj</h4>
+<h4 class="name" id="~diffObj">diffObj</h4>
 
 
 
@@ -585,7 +766,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="med.js.html">med.js</a>, <a href="med.js.html#line5">line 5</a>
+        <a href="med.js.html">med.js</a>, <a href="med.js.html#line9">line 9</a>
     </li></ul></dd>
     
 
@@ -615,13 +796,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#diff">diff</a></li><li><a href="global.html#reconstruct">reconstruct</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-minimum-edit-distance.html">minimum-edit-distance</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Sun Jun 04 2017 15:03:04 GMT-0700 (PDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Mon Jun 05 2017 08:18:43 GMT-0700 (PDT)
 </footer>
 
 <script> prettyPrint(); </script>
