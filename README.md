@@ -53,19 +53,13 @@ The minimum edit distance between two strings isn't terribly helpful most of the
     console.log(minimumEditDistance.reconstruct(array2, arrDiff.backtrace)) // [ 'cat', 'fees', 'hound' ]
 ```
 
-## JSDoc
+## API
 ```java
       /**
-       * @typedef {Object} differenceObject
-       * @property {number} the minimum edit distance
-       * @property {string[]} backtrace
-       */
-
-      /**
-       * Returns object with 'distance' and 'backtrace' keys
-       * @param {(string|string[])} p1 - first string or array
-       * @param {(string|string[])} p2 - second string or array
-       * @returns {differenceObject}
+       * p1 - first string or array
+       * p2 - second string or array
+       * distance - integer minimum edit distance
+       * backtrace - array of strings specifying edit operations
        */
       diff(p1, p2){
         ...
@@ -73,10 +67,9 @@ The minimum edit distance between two strings isn't terribly helpful most of the
       }
 
       /**
-       * Returns p1 from diff(p1, p2)
-       * @param {(string|string[])} p2 - p2 from diff(p1, p2)
-       * @param {string[]} trace - backtrace output from differenceObject
-       * @returns {typeof p1}
+       * p2 - p2 used in diff
+       * trace - backtrace from diff
+       * p1 - equal to p1 used in diff
        */
       reconstruct(p2, trace){
         ...
