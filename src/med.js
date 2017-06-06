@@ -21,7 +21,7 @@ module.exports = {
  * @param {number} [delCost=1] - weighted cost of insertion
  * @returns {diffObj}
  */
-function diff(str1, str2, subCost = 1, insertCost = 1, delCost = 1) {
+function diff(str1='', str2='', subCost = 1, insertCost = 1, delCost = 1) {
 	const str1Length = str1.length
 	const str2Length = str2.length
 	const min = Math.min, max = Math.max
@@ -83,7 +83,7 @@ function diff(str1, str2, subCost = 1, insertCost = 1, delCost = 1) {
 			if(bt){ //i.e. is bt === 1
 				trace[incrementer++] = 's' + aChar()
 			}else{
-				trace[incrementer++] = '1_'
+				trace[incrementer++] = '1'
 				index--
 			}
 		} else if (bt === 2) {
@@ -112,8 +112,8 @@ function reconstruct(str2, trace){
 	if(isStr){
 		c = ''
 		for(let i=0, n=trace.length; i < n; i++){
-			const op = trace[i], skipBlock = parseInt(op), op0 = op[0], op1 = op[1]
-			if(op1 === '_'){
+			const op = trace[i], op0 = op[0], op1 = op[1], skipBlock = parseInt(op)
+			if(skipBlock){
 				c = str2.slice(pointer - skipBlock, pointer) + c
 				pointer -= skipBlock
 			}else if(op0 === 's'){
@@ -134,8 +134,8 @@ function reconstruct(str2, trace){
 		}
 		c = []
 		for(let i=0, n=trace.length; i < n; i++){
-			const op = trace[i], skipBlock = parseInt(op), op0 = op[0], op1 = op.slice(1)
-			if(op1 === '_'){
+			const op = trace[i], op0 = op[0], op1 = op.slice(1), skipBlock = parseInt(op)
+			if(skipBlock){
 				c = prependArray(str2.slice(pointer - skipBlock, pointer), c)
 				pointer -= skipBlock
 			}else if(op0 === 's'){
