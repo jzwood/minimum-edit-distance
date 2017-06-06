@@ -21,10 +21,11 @@ module.exports = {
  * @param {number} [delCost=1] - weighted cost of insertion
  * @returns {diffObj}
  */
-function diff(str1='', str2='', subCost = 1, insertCost = 1, delCost = 1) {
+function diff(str1 = '', str2 = '', subCost = 1, insertCost = 1, delCost = 1) {
 	const str1Length = str1.length
 	const str2Length = str2.length
-	const min = Math.min, max = Math.max
+	const min = Math.min,
+		max = Math.max
 	const matrix = []
 	const backtrace = []
 
@@ -68,11 +69,12 @@ function diff(str1='', str2='', subCost = 1, insertCost = 1, delCost = 1) {
 		}
 	}
 
-  // performs backtrace
+	// performs backtrace
 	let di = str2Length,
 		dj = str1Length,
-    incrementer = 0,
-		index = str1.length - 1
+		incrementer = 0,
+		index = str1.length - 1,
+		last
 	const trace = []
 	while (di || dj) {
 		let bt = backtrace[di][dj]
@@ -80,19 +82,28 @@ function diff(str1='', str2='', subCost = 1, insertCost = 1, delCost = 1) {
 		if (bt <= 1) {
 			dj = max(0, dj - 1)
 			di = max(0, di - 1)
-			if(bt){ //i.e. is bt === 1
-				trace[incrementer++] = 's' + aChar()
-			}else{
-				trace[incrementer++] = '1'
+			if (bt === 0) {
+				if (bt === last) {
+					trace[incrementer - 1] = '' + (parseInt(trace[incrementer - 1]) + 1)
+				} else {
+					trace[incrementer++] = '1'
+				}
 				index--
+			} else if (bt === 1) {
+				trace[incrementer++] = 's' + aChar()
 			}
 		} else if (bt === 2) {
 			di = max(0, di - 1)
-			trace[incrementer++] = 'd'
-		} else if(bt === 3) {
+			if (bt === last) {
+				trace[incrementer - 1] = 'd' + ((parseInt(trace[incrementer - 1].slice(1)) || 1) + 1)
+			} else {
+				trace[incrementer++] = 'd'
+			}
+		} else if (bt === 3) {
 			dj = max(0, dj - 1)
 			trace[incrementer++] = 'i' + aChar()
 		}
+		last = bt
 	}
 
 	return {
@@ -107,33 +118,38 @@ function diff(str1='', str2='', subCost = 1, insertCost = 1, delCost = 1) {
  * @param {string[]} trace - backtrace output from diffObj
  * @returns {(string|string[])}
  */
-function reconstruct(str2, trace){
-	let pointer = str2.length, isStr = typeof str2 === 'string'
+function reconstruct(str2, trace) {
+	const isStr = typeof str2 === 'string'
 
 	const prepend = (isString => {
-		if(isString){
-			return (preString, postString) => preString[0] + postString
-		}else{
-			return (preArray, postArray) => {
+		if (isString) {
+			return (preString, postString) => preString + postString
+		} else {
+			return (_, postArray, preArray = _) => {
 				Array.prototype.push.apply(preArray, postArray)
 				return preArray
 			}
 		}
 	})(isStr)
 
-	let c = isStr ? '' : []
-	for(let i=0, n=trace.length; i < n; i++){
-		const op = trace[i], op0 = op[0], op1 = op.slice(1), skipBlock = parseInt(op)
-		if(skipBlock){
-			c = prepend(str2.slice(pointer - skipBlock, pointer), c)
+	let pointer = str2.length,
+		c = isStr ? '' : []
+	for (let i = 0, n = trace.length; i < n; i++) {
+		const op = trace[i],
+			op0 = op[0],
+			op1 = op.slice(1),
+			skipBlock = parseInt(op)
+		if (skipBlock) {
+			const skipChars = str2.slice(pointer - skipBlock, pointer)
+			c = prepend(skipChars, c)
 			pointer -= skipBlock
-		}else if(op0 === 's'){
-			c = prepend([op1], c)
+		} else if (op0 === 's') {
+			c = prepend(op1, c, [op1])
 			pointer--
-		}else if(op0 === 'i'){
-			c = prepend([op1], c)
-		}else{
-			pointer--
+		} else if (op0 === 'i') {
+			c = prepend(op1, c, [op1])
+		} else {
+			pointer -= parseInt(op1) || 1
 		}
 	}
 	return c

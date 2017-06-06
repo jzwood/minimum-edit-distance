@@ -56,3 +56,5 @@ for(let i=0, testCases=100; i<testCases; i++){
 	assert.equals(difference.distance, benchmark, `test ${i}a \t`.cyan)
 	assert.equals(str1, minimumEditDistance.reconstruct(str2, difference.backtrace), `test ${i}b \t`.cyan)
 }
+
+const moreAsciiTests = require('./misctests.js')
