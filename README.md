@@ -18,6 +18,8 @@ The minimum edit distance between two strings isn't terribly helpful most of the
 ## Usage
 
 ```javascript
+    const minimumEditDistance = require('../src/med.js')
+
     let str1 = 'dhyfldnsgagfhc';
     let str2 = 'dososjhbabadhfhshdsjds';
 
@@ -26,12 +28,15 @@ The minimum edit distance between two strings isn't terribly helpful most of the
     console.log(difference.distance); // 18
 
     console.log(difference.backtrace);
-    // [ 'sc',  'sh', 'sf', 'sg', 'sa', 'sg', '1_', 'sn', 'd', 'd', '1_', 'sl', 'sf', 'sy', 'd', '1_', 'd', 'd', 'd', 'd', 'd', '1_' ]
+    // [ 'sc', 'sh', 'sf', 'sg', 'sa', 'sg', '1', 'sn', 'd2', '1', 'sl', 'sf', 'sy', 'd', '1', 'd5', '1' ]
 
-    // prefix 's' = substitute suffix char
-    // 'i' = insert suffix char
-    // 'd' = delete
-    // [0-9]+_ = skip prefix num of chars
+    /*
+     *  prefix key:
+     *    s = substitute
+     *    i = insertion
+     *    d = deletion #
+     *    # = skip num
+     */
 
     let stringOne = minimumEditDistance.reconstruct(str2, difference.backtrace)
 
@@ -44,13 +49,13 @@ The minimum edit distance between two strings isn't terribly helpful most of the
     let array1 = ['cat', 'fees', 'hound']
     let array2 = ['cat', 'kite', 'undo', 'hound']
 
-    let arrDiff = minimumEditDistance.diff(array1, array2)
+    let arrayDifference = minimumEditDistance.diff(array1, array2)
 
-    console.log(arrDiff.distance) //2
+    console.log(arrayDifference.distance) //2
 
-    console.log(arrDiff.backtrace) // [ '1_', 'sfees', 'd', '1_' ]
+    console.log(arrayDifference.backtrace) // [ '1', 'sfees', 'd', '1' ]
 
-    console.log(minimumEditDistance.reconstruct(array2, arrDiff.backtrace)) // [ 'cat', 'fees', 'hound' ]
+    console.log(minimumEditDistance.reconstruct(array2, arrayDifference.backtrace)) // [ 'cat', 'fees', 'hound' ]
 ```
 
 ## API
@@ -61,7 +66,7 @@ The minimum edit distance between two strings isn't terribly helpful most of the
        * distance - integer minimum edit distance
        * backtrace - array of strings specifying edit operations
        */
-      diff(p1, p2){
+      diff(p1, p2, substitutionCost=1, insertionCost=1, deletionCost=1){
         ...
         return {"distance": distance, "backtrace": backtrace}
       }

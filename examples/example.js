@@ -1,19 +1,23 @@
-const med = require('../src/med.js')
+const minimumEditDistance = require('../src/med.js')
 
-let str1 = 'here we have one string'
-let str2 = 'here we have another string'
+let str1 = 'dhyfldnsgagfhc';
+let str2 = 'dososjhbabadhfhshdsjds';
 
-let diff = med.diff(str1, str2)
+let difference = minimumEditDistance.diff(str1, str2)
 
-console.log(diff.distance) // 5
+console.log(difference.distance); // 18
 
-console.log(str1 === med.reconstruct(str2, diff.backtrace)) // true
+console.log(difference.backtrace);
+// [ 'sc', 'sh', 'sf', 'sg', 'sa', 'sg', '1', 'sn', 'd2', '1', 'sl', 'sf', 'sy', 'd', '1', 'd5', '1' ]
 
-let arr1 = ['hamburger','cat','hound']
-let arr2 = ['hamburger','hound', 'cat', 'fees', 'hound']
+/*
+ *  prefix key:
+ *    s = substitute
+ *    i = insertion
+ *    d = deletion #
+ *    # = skip num
+ */
 
-diff = med.diff(arr1, arr2)
+let stringOne = minimumEditDistance.reconstruct(str2, difference.backtrace)
 
-console.log(diff.distance, diff.backtrace) // 2 [ '1_', 'd', '1_', 'd', '1_' ]
-
-console.log(med.reconstruct(arr2, diff.backtrace)) //[ 'hamburger', 'cat', 'hound' ]
+console.log(str1 === stringOne); // true
