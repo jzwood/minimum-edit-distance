@@ -108,44 +108,32 @@ function diff(str1='', str2='', subCost = 1, insertCost = 1, delCost = 1) {
  * @returns {(string|string[])}
  */
 function reconstruct(str2, trace){
-	let c, pointer = str2.length, isStr = typeof str2 === 'string'
-	if(isStr){
-		c = ''
-		for(let i=0, n=trace.length; i < n; i++){
-			const op = trace[i], op0 = op[0], op1 = op[1], skipBlock = parseInt(op)
-			if(skipBlock){
-				c = str2.slice(pointer - skipBlock, pointer) + c
-				pointer -= skipBlock
-			}else if(op0 === 's'){
-				c = op1 + c
-				pointer--
-			}else if(op0 === 'i'){
-				c = op1 + c
-			}else{
-				pointer--
+	let pointer = str2.length, isStr = typeof str2 === 'string'
+
+	const prepend = (isString => {
+		if(isString){
+			return (preString, postString) => preString[0] + postString
+		}else{
+			return (preArray, postArray) => {
+				Array.prototype.push.apply(preArray, postArray)
+				return preArray
 			}
 		}
-	}else{
-		const prependArray = (preArray, postArray) => {
-			for (let i = 0, len = postArray.length; i < len; i++) {
-				preArray.push(postArray[i])
-			}
-			return preArray
-		}
-		c = []
-		for(let i=0, n=trace.length; i < n; i++){
-			const op = trace[i], op0 = op[0], op1 = op.slice(1), skipBlock = parseInt(op)
-			if(skipBlock){
-				c = prependArray(str2.slice(pointer - skipBlock, pointer), c)
-				pointer -= skipBlock
-			}else if(op0 === 's'){
-				c = prependArray([op1], c)
-				pointer--
-			}else if(op0 === 'i'){
-				c = prependArray([op1], c)
-			}else{
-				pointer--
-			}
+	})(isStr)
+
+	let c = isStr ? '' : []
+	for(let i=0, n=trace.length; i < n; i++){
+		const op = trace[i], op0 = op[0], op1 = op.slice(1), skipBlock = parseInt(op)
+		if(skipBlock){
+			c = prepend(str2.slice(pointer - skipBlock, pointer), c)
+			pointer -= skipBlock
+		}else if(op0 === 's'){
+			c = prepend([op1], c)
+			pointer--
+		}else if(op0 === 'i'){
+			c = prepend([op1], c)
+		}else{
+			pointer--
 		}
 	}
 	return c
