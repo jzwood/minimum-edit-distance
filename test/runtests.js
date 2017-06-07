@@ -2,7 +2,6 @@ const assert = require('./assert.js').assert
 const minimumEditDistance = require('../src/med.js')
 const colors = require('colors')
 const fs = require('fs')
-
 const leven = require('leven')
 
 /*
