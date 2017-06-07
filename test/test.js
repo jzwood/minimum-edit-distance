@@ -4,14 +4,13 @@ const assert = require('./assert.js').assert
 const colors = require('colors')
 
 const randomAscii = (asciiLow, asciiHi, numOfChars) => String.fromCharCode.apply(undefined,Array(numOfChars).fill(0).map(i => asciiLow + ~~(Math.random() * (asciiHi - asciiLow))))
-const success = 0
+const success = 1//0
 
 /*
  *  TEST CASES
  */
 
 function nTests(numOfTests, str1Lim, str2Lim=str1Lim){
-  const success = 0
   for(let i=0, testCases=numOfTests; i<testCases; i++){
     const str1 = randomAscii(0, 256, ~~(Math.random() * str1Lim))
     const str2 = randomAscii(0, 256, ~~(Math.random() * str2Lim))
