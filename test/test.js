@@ -4,7 +4,7 @@ const assert = require('./assert.js').assert
 const colors = require('colors')
 
 const randomAscii = (asciiLow, asciiHi, numOfChars) => String.fromCharCode.apply(undefined,Array(numOfChars).fill(0).map(i => asciiLow + ~~(Math.random() * (asciiHi - asciiLow))))
-const success = 1//0
+const success = 1, failure = !(success)
 
 /*
  *  TEST CASES
@@ -30,8 +30,8 @@ function nTests(numOfTests, str1Lim, str2Lim=str1Lim){
 
 if(nTests(25,0,20) && nTests(25,20,0) && nTests(1500,100)){
   console.log('tests passing'.green)
-  return success
+  process.exit(success)
 }else{
   console.log('test fails'.red)
-  return !(success)
+  process.exit(failure)
 }
