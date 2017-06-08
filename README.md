@@ -9,7 +9,7 @@ The minimum edit distance on its own is, albeit interesting, not terribly useful
 
 ### install
 
-```
+```shell
     $ npm install minimum-edit-distance
 ```
 ### require
@@ -20,8 +20,6 @@ The minimum edit distance on its own is, albeit interesting, not terribly useful
 ## Usage
 
 ```javascript
-    const minimumEditDistance = require('../src/med.js')
-
     let str1 = 'dhyfldnsgagfhc';
     let str2 = 'dososjhbabadhfhshdsjds';
 
