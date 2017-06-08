@@ -1,9 +1,11 @@
 # minimum-edit-distance
 
-The **minimum edit distance** is the number of insertions, deletions, and substitutions required to transform one string into another.
+The **minimum edit distance** is the integer number of character insertions, deletions, and substitutions required to transform one string into another.
 
-## info
-The minimum edit distance between two strings isn't terribly helpful most of the time. What is interesting and useful is the _minimum edit backtrace_. This backtrace contains all the information necessary to transform one string to another (see **usage** section).
+[![Build Status](https://travis-ci.org/jzwood/minimum-edit-distance.svg?branch=master)](https://travis-ci.org/jzwood/minimum-edit-distance) [![](https://img.shields.io/badge/awesome-yes-FF7AA8.svg)](https://giphy.com/search/awesome)
+
+## Info
+The minimum edit distance on its own is, albeit interesting, not terribly useful. However, the minimum edit matrix _backtrace_ is both interesting and useful. This backtrace contains, not only all the information necessary to determine the minimum edit distance, but also the smallest amount of information required to transform the second string back into the first (see **usage** section).
 
 ### install
 
@@ -81,6 +83,7 @@ The minimum edit distance between two strings isn't terribly helpful most of the
         return p1
       }
 ```
-## License
+
+## license
 
 MIT
