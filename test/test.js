@@ -10,7 +10,22 @@ const success = 0, failure = !(success)
  *  TEST CASES
  */
 
+function compareArrays(arr1, arr2){
+  if(Object.prototype.toString.call(arr1) === '[object Array]') {
+    for(let i=0, n=arr1.length; i<n; i++){
+      if(arr1[i] !== arr2[i]){
+        return false
+      }
+    }
+    return true
+  }else{
+    console.error('compareArrays input. arr1, not array',arr1)
+    return false
+  }
+}
+
 function nTests(numOfTests, str1Lim, str2Lim=str1Lim){
+  numOfTests = ~~(numOfTests/3)
   let passes = 0, fails = 0
   for(let i=0, testCases=numOfTests; i<testCases; i++){
     const str1 = randomAscii(0, 256, ~~(Math.random() * str1Lim))
@@ -18,9 +33,24 @@ function nTests(numOfTests, str1Lim, str2Lim=str1Lim){
 
     const difference = minimumEditDistance.diff(str1, str2), benchmark = leven(str1, str2)
 
-    // assert.equals(difference.distance, benchmark, `test ${i}a \t`.cyan)
     const rec = minimumEditDistance.reconstruct(str2, difference.backtrace)
     const equ = (str1 === rec)
+
+    const arr1 = [
+      randomAscii(0, 256, ~~(Math.random() * str1Lim)),
+      randomAscii(0, 256, ~~(Math.random() * str1Lim)),
+      randomAscii(0, 256, ~~(Math.random() * str1Lim))
+    ]
+    const arr2 = [
+      randomAscii(0, 256, ~~(Math.random() * str2Lim)),
+      randomAscii(0, 256, ~~(Math.random() * str2Lim)),
+      randomAscii(0, 256, ~~(Math.random() * str2Lim))
+    ]
+
+    const arrDifference = minimumEditDistance.diff(arr1, arr2)
+
+    const arrRec = minimumEditDistance.reconstruct(arr2, arrDifference.backtrace)
+    const arrEqu = compareArrays(arr1, arrRec)
 
     if(difference.distance !== benchmark){
       console.log(`${difference.distance} =/= ${benchmark} ✗`.red)
@@ -31,6 +61,13 @@ function nTests(numOfTests, str1Lim, str2Lim=str1Lim){
 
     if(!equ){
       console.log(`${str1} =/= ${rec} ✗`.red)
+      fails++
+    }else{
+      passes++
+    }
+
+    if(!arrEqu){
+      console.log(`${arr1} =/= ${arrRec} ✗`.red)
       fails++
     }else{
       passes++
